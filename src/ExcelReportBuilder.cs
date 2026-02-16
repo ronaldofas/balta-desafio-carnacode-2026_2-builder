@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class ExcelReportBuilder : IReportBuilder
 {
-    private SalesReport _report;
+    private SalesReport _report = new SalesReport();
 
     public ExcelReportBuilder()
     {

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 public class SalesReport
 {
     public string Title { get; set; }
@@ -25,6 +28,17 @@ public class SalesReport
 
     public SalesReport()
     {
+        Title = string.Empty;
+        Format = string.Empty;
+        HeaderText = string.Empty;
+        FooterText = string.Empty;
+        ChartType = string.Empty;
+        SortBy = string.Empty;
+        GroupBy = string.Empty;
+        Orientation = string.Empty;
+        PageSize = string.Empty;
+        CompanyLogo = string.Empty;
+        WaterMark = string.Empty;
         Columns = new List<string>();
         Filters = new List<string>();
     }

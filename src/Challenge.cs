@@ -46,7 +46,8 @@ namespace DesignPatternChallenge
             report1.Generate();
 
             // Problema 2: Muitos setters - ordem não importa, pode esquecer configurações obrigatórias
-            // Solução: Implementação do ExcelReportBuilder que encapsula a lógica de criação e validação implícita através da interface fluente.
+            // Solução: Implementação do ExcelReportBuilder que encapsula a lógica de criação e validação 
+            // implícita através da interface fluente.
             var report2 = new ExcelReportBuilder()
                 .SetTitle("Relatório Trimestral")
                 .SetStartDate(new DateTime(2024, 1, 1))
@@ -62,23 +63,12 @@ namespace DesignPatternChallenge
             report2.Generate();
 
             // Problema 3: Relatórios com configurações parecidas exigem repetir muito código
-            var report3 = new SalesReport();
-            report3.Title = "Vendas Anuais";
-            report3.Format = "PDF";
-            report3.StartDate = new DateTime(2024, 1, 1);
-            report3.EndDate = new DateTime(2024, 12, 31);
-            report3.IncludeHeader = true;
-            report3.HeaderText = "Relatório de Vendas";
-            report3.IncludeFooter = true;
-            report3.FooterText = "Confidencial";
-            report3.Columns.Add("Produto");
-            report3.Columns.Add("Quantidade");
-            report3.Columns.Add("Valor");
-            report3.IncludeCharts = true;
-            report3.ChartType = "Pie";
-            report3.IncludeTotals = true;
-            report3.Orientation = "Landscape";
-            report3.PageSize = "A4";
+            // Solução: Utilização do ReportDirector para orquestrar a construção de relatórios padrões, 
+            // evitando duplicação de código.
+            var director = new ReportDirector();
+            var builder3 = new PdfReportBuilder();
+            director.MakeAnnualReport(builder3);
+            var report3 = builder3.Build();
 
             report3.Generate();
 
