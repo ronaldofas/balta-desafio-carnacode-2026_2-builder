@@ -46,21 +46,18 @@ namespace DesignPatternChallenge
             report1.Generate();
 
             // Problema 2: Muitos setters - ordem não importa, pode esquecer configurações obrigatórias
-            var report2 = new SalesReport();
-            report2.Title = "Relatório Trimestral";
-            report2.Format = "Excel";
-            report2.StartDate = new DateTime(2024, 1, 1);
-            report2.EndDate = new DateTime(2024, 3, 31);
-            report2.Columns.Add("Vendedor");
-            report2.Columns.Add("Região");
-            report2.Columns.Add("Total");
-            report2.IncludeCharts = true;
-            report2.ChartType = "Line";
-            // Esqueci de configurar algo? O código compila mas pode falhar em runtime
-            report2.IncludeHeader = true;
-            // Esqueci o HeaderText? 
-            report2.GroupBy = "Região";
-            report2.IncludeTotals = true;
+            // Solução: Implementação do ExcelReportBuilder que encapsula a lógica de criação e validação implícita através da interface fluente.
+            var report2 = new ExcelReportBuilder()
+                .SetTitle("Relatório Trimestral")
+                .SetStartDate(new DateTime(2024, 1, 1))
+                .SetEndDate(new DateTime(2024, 3, 31))
+                .SetColumns(new List<string> { "Vendedor", "Região", "Total" })
+                .SetIncludeCharts(true)
+                .SetChartType("Line")
+                .SetIncludeHeader(true)
+                .SetGroupBy("Região")
+                .SetIncludeTotals(true)
+                .Build();
 
             report2.Generate();
 
