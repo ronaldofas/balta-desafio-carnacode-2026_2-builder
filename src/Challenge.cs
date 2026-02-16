@@ -73,10 +73,26 @@ namespace DesignPatternChallenge
             report3.Generate();
 
             // Perguntas para reflexão:
+
             // - Como criar relatórios complexos sem construtores gigantes?
+            // R: Usando o padrão Builder, onde cada configuração é definida por um método
+            //    separado (ex: SetTitle(), SetChartType()), tornando a construção incremental
+            //    e legível, em vez de um construtor com dezenas de parâmetros.
+
             // - Como garantir que configurações obrigatórias sejam definidas?
+            // R: O Builder pode validar no método Build() se os campos obrigatórios foram
+            //    preenchidos, lançando uma exceção caso contrário. A interface fluente também
+            //    guia o desenvolvedor sobre quais opções estão disponíveis.
+
             // - Como reutilizar configurações comuns entre relatórios?
+            // R: Usando o Director (ReportDirector), que encapsula sequências de configuração
+            //    pré-definidas (ex: MakeAnnualReport()), evitando duplicação de código entre
+            //    relatórios similares.
+
             // - Como tornar o processo de criação mais legível e fluente?
+            // R: Retornando "this" (ou IReportBuilder) em cada método setter, permitindo o
+            //    encadeamento de chamadas (Fluent Interface), como por exemplo:
+            //    new PdfReportBuilder().SetTitle("Vendas").SetIncludeCharts(true).Build();
         }
     }
 }
